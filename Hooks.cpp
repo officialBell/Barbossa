@@ -31,6 +31,8 @@ void InitializeVMTs() {
     
     uintptr_t findClientMode = CPatternScanner::Instance()->GetPointer("client.dylib", (unsigned char*)"\xE8\x00\x00\x00\x00\x48\xC7\xC3\x00\x00\x00\x00\x4C\x8D\x3D\x00\x00\x00\x00\x0F\x1F\x44\x00", "x????xxx????xxx????xxxx", 0xF) + 0x4;
     
+    uintptr_t findClanTag = CPatternScanner::Instance()->GetPointer("engine.dylib", (unsigned char*) "\x48\x8D\x3D\x00\x00\x00\x00\x48\x89\xFE\xE8\x00\x00\x00\x00\xE9\x00\x00\x00\x00", "xxx????xxxx????x????", 0xB) + 0x4;
+    
     uintptr_t findGlobalVars = CPatternScanner::Instance()->GetPointer("client.dylib", (unsigned char*)"\x48\x8D\x05\x00\x00\x00\x00\x48\x8B\x00\xF3\x0F\x10\x00\x00\xF3\x0F\x11\x83\x00\x00\x00\x00", "xxx????xxxxxx??xxxx????", 0x3) + 0x4;
     
     uintptr_t booladdr = CPatternScanner::Instance()->GetProcedure("engine.dylib", (unsigned char*)"\x41\xB5\x00\x84\xC0\x74\x11", "xx?xxxx", 0x1) + 0x2;
@@ -39,7 +41,7 @@ void InitializeVMTs() {
         ProtectAddr(bSendPacket, PROT_READ | PROT_WRITE | PROT_EXEC);
         //vm_protect(mach_task_self(), (vm_address_t)bSendPacket, 1, 0, VM_PROT_ALL);
     
-    
+    SetTag = reinterpret_cast<SendClanTagFn>(findClanTag);
     pClientMode = reinterpret_cast<IClientMode*>(findClientMode);
     pGlobals = *reinterpret_cast<CGlobalVarsBase**>(findGlobalVars);
     
