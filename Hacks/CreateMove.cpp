@@ -784,10 +784,13 @@ auto hacks(CUserCmd* cmd, C_BaseEntity* local, C_BaseCombatWeapon* weapon, Vecto
     
     MakeNoRecoil(local, cmd); // Add norecoil
     
-    //SetClanTag(draw->m_szChangedValue[0].c_str(), draw->m_szChangedValue[1].c_str()); // Clantag Changer.
-    
     if(draw->m_szChangedValue[2].length() > 0) // Name Changer.
         ChangeName(draw->m_szChangedValue[2].c_str());
+        
+        if(draw->m_szChangedValue[3].length() > 0){
+            if(vars.misc.clantag)
+                SetTag(draw->m_szChangedValue[3].c_str(), "");
+                }
 }
 bool bOnce = false;
 
