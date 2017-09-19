@@ -950,17 +950,18 @@ void cdrawings::drawmenu() { // This is where we render our menu, add items and 
         this->addbutton(rewidth + 12, y + 30, "World Paint", &vars.misc.worldpaint, 3);
     }
     
-    if(vars.tabIndex == tTabs::Misc) {
+ if(vars.tabIndex == tTabs::Misc) {
         this->addbutton(rewidth + 12, y + 30, "Enabled", &vars.misc.enabled, 0);
         this->addbutton(rewidth + 12, y + 30, "Bunny hop", &vars.misc.bhop, 1);
-        this->textbox(rewidth + 12, y + 30, 170, "Name", m_szCurrentString, 2, 2, &vars.misc_changename);
-        this->addslider(rewidth + 12, y + 30, 90, "Field Of View", vars.misc.fov, 3, 60, 0);
-        this->addbutton(rewidth + 12, y + 30, "Auto Strafe", &vars.misc.autostrafe, 4);
-        this->addbutton(rewidth + 12, y + 30, "Circle Strafe", &vars.misc.circlestrafe, 5);
-        this->addbutton(rewidth + 12, y + 30, "Thirdperson (HVH)", &vars.misc.thirdpersonmode, 6);
-        this->addbutton(rewidth + 12, y + 30, "Anti Screenshot", &vars.misc.antiscreenshot, 7);
-        
-        this->addbutton(rewidth + 12, y + 30, "Anti Untrust", &vars.misc.antiuntrust, 10, IFlags::IFLAG_WARNING);
+        this->textbox(rewidth + 12, y + 30, 100, "Name", m_szCurrentString, 2, 2, &vars.misc_changename);
+        this->textbox(rewidth + 12, y + 30, 100, "Clantag", m_szCurrentString, 3, 3, &vars.misc_clantag);
+        this->addslider(rewidth + 12, y + 30, 90, "Field Of View", vars.misc.fov, 4, 60, 0);
+        this->addbutton(rewidth + 12, y + 30, "Auto Strafe", &vars.misc.autostrafe, 5);
+        this->addbutton(rewidth + 12, y + 30, "Circle Strafe", &vars.misc.circlestrafe, 6);
+        this->addbutton(rewidth + 12, y + 30, "Thirdperson (HVH)", &vars.misc.thirdpersonmode, 7);
+
+        this->addbutton(rewidth + 12 + 170, y + 30, "Anti Screenshot", &vars.misc.antiscreenshot, 10);
+        this->addbutton(rewidth + 12, y + 30, "Anti Untrust", &vars.misc.antiuntrust, 10);
     }
     
     if(vars.tabIndex == tTabs::HvH) {
