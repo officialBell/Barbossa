@@ -290,4 +290,6 @@ void FixMovement(Vector& oang, CUserCmd* pCmd) {
         pCmd->forwardmove = -pCmd->forwardmove;
 }
 
-
+void SetClanTag(const char* tag, const char* name) {
+    SetTag(tag, name);
+}
