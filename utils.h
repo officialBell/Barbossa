@@ -4,8 +4,8 @@ extern void SinCos(float radians, float *sine, float *cosine);
 extern void AngleVectors(const Vector & angles, Vector * forward);
 extern void AngleVectors(const Vector & angles, Vector * forward, Vector * right, Vector * up);
 extern void VectorAngles(const Vector& forward, Vector &angles);
-extern void FixMovement(Vector& oang, CUserCmd* cmd);
 typedef void (*SendClanTagFn) (const char*, const char*);
+extern void SetClanTag(const char* tag, const char* name);
 extern void SetClanTag(const char* tag, const char* name);
 extern bool WorldToScreen(Vector& vFrom, Vector& vTo);
 extern bool DrawPlayerBox(C_BaseEntity* pEntity, boxstruct& str); // Credit's to dude719 & keybode.
