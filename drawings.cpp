@@ -849,6 +849,11 @@ enum cColorTabs {
     World = 5
 };
 
+enum cAimTabs {
+    Legit = 0,
+    Rage = 1,
+};
+
 void cdrawings::drawmouse() {
     int mouse_x = this->GetMouse().x;
     int mouse_y = this->GetMouse().y;
@@ -895,6 +900,7 @@ void cdrawings::drawmenu() { // This is where we render our menu, add items and 
     /* Aimbot, Visuals, Chams, Removals, Misc, HvH, Playerlist, Colors */
     
     if(vars.tabIndex == tTabs::Aimbot) {
+
         this->addbutton(rewidth + 12, y + 30, "Enabled", &vars.aimbot.enabled, 0);
         this->addbutton(rewidth + 12, y + 30, "Silent Aim", &vars.aimbot.silent, 1);
         this->addbutton(rewidth + 12, y + 30, "pSilent Aim", &vars.aimbot.psilent, 2);
@@ -940,7 +946,7 @@ void cdrawings::drawmenu() { // This is where we render our menu, add items and 
     if(vars.tabIndex == tTabs::Removals) {
         this->addbutton(rewidth + 12, y + 30, "No Recoil", &vars.misc.norecoil, 0);
         this->addbutton(rewidth + 12, y + 30, "No Visual Recoil", &vars.misc.novisualrecoil, 1);
-        this->addbutton(rewidth + 12, y + 30, "No Sky", &vars.misc.nosky, 2);
+        this->addbutton(rewidth + 12, y + 30, "Sky Colour", &vars.misc.nosky, 2);
         this->addbutton(rewidth + 12, y + 30, "World Paint", &vars.misc.worldpaint, 3);
     }
     
@@ -1110,6 +1116,9 @@ void cdrawings::drawmenu() { // This is where we render our menu, add items and 
         
         if(vars.colors.tab == cColorTabs::World) {
             this->drawcolorpicker(rewidth + 12, y + 70, "World", vars.colors.world, 0);
+            
+            this->drawcolorpicker(rewidth + 12 + 300, y + 70, "Sky Colour", vars.colors.Sky, 0);
+
         }
     }
     
