@@ -76,6 +76,8 @@ public:
         int tbox_ignore[4] = { 236, 81, 63, 255 }; // T nonvis box colour
         int ctbox_ignore[4] = { 51, 124, 197, 255 }; // cT nonvis box colour (this color is soo fucking p100!)
         
+        int Sky [4] = { 0, 0 , 0 };
+        
     }visuals;
     
     class cMisc {
@@ -84,8 +86,8 @@ public:
         bool antiuntrust = true; // Anti Untrust obv
         bool norecoil = false; // Basically RCS without slider
         bool novisualrecoil = false; // No visual recoil ofc
-        bool nosky = false; // No Sky (Does not work)
-        bool worldpaint = false; // World Paint (Does not work)
+        bool nosky = false; // No Sky
+        bool worldpaint = false; // World Paint
         bool bhop = false; // BunnyHop
         bool autostrafe = false; // Strafes for you ofc
         bool circlestrafe = false; // Circle strafes
@@ -122,6 +124,7 @@ public:
         Color hands;
         Color hands_ign;
         
+        Color Sky;
         Color world;
         
     }colors;
