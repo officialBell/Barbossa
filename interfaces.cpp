@@ -19,6 +19,9 @@ IPrediction* pPrediction = nullptr;
 IGameMovement* pGameMovement = nullptr;
 IMoveHelper* pMoveHelper = nullptr;
 IPhysicsSurfaceProps* pPhysics = nullptr;
+//
+SendClanTagFn SetTag;
+
 
 VMT* painthook;
 VMT* createmovehook;
