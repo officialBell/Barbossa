@@ -103,8 +103,7 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
         }
         
        
-        /*
-         No Sky, drinks fps...
+         //No Sky, drinks fps...
          
          for (MaterialHandle_t i = pMatSystem->FirstMaterial(); i != pMatSystem->InvalidMaterial(); i = pMatSystem->NextMaterial(i))
          {
@@ -118,10 +117,30 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
          
          if (strstr(pMaterial->GetTextureGroupName(), TEXTURE_GROUP_SKYBOX))
          {
-         pMaterial->ColorModulate(0, 0, 0);
+             pMaterial->ColorModulate(vars.colors.Sky);
          }
          
-         } */
+         }
+        
+        
+        // World Paint, drinks fps...
+        
+        for (MaterialHandle_t i = pMatSystem->FirstMaterial(); i != pMatSystem->InvalidMaterial(); i = pMatSystem->NextMaterial(i))
+        {
+            IMaterial *pMaterial = pMatSystem->GetMaterial(i);
+            
+            if (!pMaterial)
+                continue;
+            
+            if(!vars.misc.worldpaint)
+                continue;
+            
+            if (strstr(pMaterial->GetTextureGroupName(), TEXTURE_GROUP_WORLD))
+            {
+                pMaterial->ColorModulate(vars.colors.world);
+            }
+            
+        }
        
 
         
