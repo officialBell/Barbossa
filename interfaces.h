@@ -17,6 +17,10 @@ extern IPrediction* pPrediction;
 extern IGameMovement* pGameMovement;
 extern IMoveHelper* pMoveHelper;
 extern IPhysicsSurfaceProps* pPhysics;
+//
+extern SendClanTagFn SetTag;
+typedef void (*SendClanTagFn) (const char*, const char*);
+
 
 
 extern VMT* painthook;
