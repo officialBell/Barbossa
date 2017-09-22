@@ -14,6 +14,7 @@ McSwaggens (for his linux base and much other things)
 git clone https://github.com/sonicrules11/Barbossa 
 cd Barbossa
 Open Xcode build 
+Build it 
 Open Products folder
 Drag to Barbossa folder
 Tab back to terminal
