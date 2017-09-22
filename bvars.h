@@ -103,6 +103,7 @@ public:
         int fakelagfactor = 0; // Fake Lag (Does not work)
         bool fakelag = false; // Fake lag enable ^
         bool fakeaa = false; // Enable Fake ofc
+        bool clantag = true; // Enables Clantag
     }misc;
     
     class cColors {
