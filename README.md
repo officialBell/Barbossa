@@ -13,7 +13,7 @@ McSwaggens (for his linux base and much other things)
 ### Cant Inject?
 ```
 https://github.com/scen/osxinj
-Recompile osxinj it for some reason when I upload osxinj it doesnt work for anyone except me 
+Recompile osxinj and bootstrap, for some reason when I upload osxinj and bootsrap  it doesnt work for anyone except me 
 ```
 --------------------------
 ```
