@@ -6,6 +6,7 @@ public:
     bool aaY_opend;
     bool aaX_opend;
     bool hands_opend;
+    bool weapons_opend;
     bool players_opend;
     bool playerlist_opend_x[64];
     bool playerlist_opend_y[64];
@@ -27,11 +28,11 @@ public:
     public:
         bool enabled = false; // Enable
         bool silent = false; // Silent Aim obv
-        bool psilent = false; // Perfect Silent (Does not work)
+        bool psilent = false; // Perfect Silent
         int fov = 20; // Aimbot Fov
-        int hitbox = 2; // Hitbox
+        int hitbox = 2; // Hitbox/Bone
         int pointscale = 73; // Autowall Pointscale
-        int bone = 0; // Bone [DO NOT TOUCH]
+        int bone = 0; // Bone [I dont know why this is here]
         bool hitscan = false; // Hitscan (Does not work)
         bool selfpred = false; // // Self spread obv
         bool autowall = false; // Shoots through walls
@@ -48,17 +49,20 @@ public:
         bool name = false; // Name ESP
         bool health = false; // Health Bar (Does not work)
         bool healthtext = false; // Health Text
-        bool weapon = false; // Current weapon (Does not work)
+        bool weapon = false; // Current weapon ESP (Does not work)
         bool snapline = false; // Snaplines obv
         bool handchams = true; // Handchams obv
+        bool weaponchams = true; // Weapon chams obv
         bool skeleton = false; // Skeleton ESP
         bool chams = false; // Player Chams
         bool headhitbox = false; // Snaplines but goes to head
         bool enemyonly = false; // Enemy Only ofc
         
+        int weaponType = 1; // Weapon Type 0 - Lit 1 - Texture
         int handsType = 1; // Hand Type 0 - Lit 1 - Texture
         int playersType = 0; // Player Type 0 - Lit 1 - Texture
         
+        int weaponchams_alpha = 255; // Weapon Chams Alpha
         int handchams_alpha = 255; // Hand Chams Alpha
         int playerchams_alpha = 255; // Player Chams Alpha
         
