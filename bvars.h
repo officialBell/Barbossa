@@ -129,6 +129,9 @@ public:
         Color hands;
         Color hands_ign;
         
+        Color weapon;
+        Color weapon_ign;
+        
         Color Sky;
         Color world;
         
