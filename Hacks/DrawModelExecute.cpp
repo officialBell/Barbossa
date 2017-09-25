@@ -145,6 +145,35 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
 
         
         
+        // Weapon Chams
+        if(pszModel.find("weapons") != std::string::npos  && vars.visuals.weaponchams) {
+            if(!(pszModel.find("arms") != std::string::npos)) {
+                
+            IMaterial* materialCheckFirst = [&]() -> IMaterial* {
+                if(vars.visuals.weaponType == 0)
+                    return firstLit;
+                else if(vars.visuals.weaponType == 1)
+                    return firstLayer;
+            }();
+            
+            IMaterial* materialCheckSecond = [&]() -> IMaterial* {
+                if(vars.visuals.weaponType == 0)
+                    return secondLit;
+                else if(vars.visuals.weaponType == 1)
+                    return secondLayer;
+            }();
+            /* Disables Ignored Cham
+            materialCheckSecond->ColorModulate(vars.colors.weapon_ign);
+            materialCheckSecond->AlphaModulate(vars.visuals.weaponchams_alpha / 255.f);
+            pModelRender->ForcedMaterialOverride(materialCheckSecond);
+            CallOriginalModel(thisptr, context, state, pInfo, pCustomBoneToWorld);
+            */
+            materialCheckFirst->ColorModulate(vars.colors.weapon);
+            materialCheckFirst->AlphaModulate(vars.visuals.weaponchams_alpha / 255.f);
+            pModelRender->ForcedMaterialOverride(materialCheckFirst);
+            CallOriginalModel(thisptr, context, state, pInfo, pCustomBoneToWorld);
+        }
+        // Hand Chams
         if(pszModel.find("arms") != std::string::npos && vars.visuals.handchams) {
             
             IMaterial* materialCheckFirst = [&]() -> IMaterial* {
@@ -171,7 +200,7 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
             pModelRender->ForcedMaterialOverride(materialCheckFirst);
             CallOriginalModel(thisptr, context, state, pInfo, pCustomBoneToWorld);
         }
-        
+        // Player Chams
         if(pszModel.find("models/player") != std::string::npos && vars.visuals.chams) {
             auto* local = pEntList->GetClientEntity(pEngine->GetLocalPlayer());
             auto* entity = pEntList->GetClientEntity(pInfo.entity_index);
@@ -231,4 +260,5 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
     
     CallOriginalModel(thisptr, context, state, pInfo, pCustomBoneToWorld);
     pModelRender->ForcedMaterialOverride(NULL);
+    }
 }
