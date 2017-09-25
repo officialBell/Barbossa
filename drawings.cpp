@@ -846,12 +846,8 @@ enum cColorTabs {
     CTBoxes = 2,
     TBoxes = 3,
     HANDChams = 4,
-    World = 5
-};
-
-enum cAimTabs {
-    Legit = 0,
-    Rage = 1,
+    WEAPCHams = 5,
+    World = 6
 };
 
 void cdrawings::drawmouse() {
@@ -937,9 +933,11 @@ void cdrawings::drawmenu() { // This is where we render our menu, add items and 
         
         this->addbutton(rewidth + 12, y + 30, "Chams", &vars.visuals.chams, 0);
         this->addbutton(rewidth + 12 + 170, y + 30, "Hands", &vars.visuals.handchams, 0);
+        this->addbutton(rewidth + 12 + 290, y + 30, "Weapons", &vars.visuals.weaponchams, 0);
         
-        this->addcombo(rewidth + 12 + 170, y + 30, 90, "Hands", chamsvector, vars.visuals.handsType, &vars.hands_opend, 1);
         this->addcombo(rewidth + 12, y + 30, 90, "Players", chamsvector, vars.visuals.playersType, &vars.players_opend, 1);
+        this->addcombo(rewidth + 12 + 170, y + 30, 90, "Hands", chamsvector, vars.visuals.handsType, &vars.hands_opend, 1);
+        this->addcombo(rewidth + 12 + 290, y + 30, 90, "Weapons", chamsvector, vars.visuals.weaponType, &vars.weapons_opend, 1);
         
     }
     
@@ -1079,6 +1077,7 @@ void cdrawings::drawmenu() { // This is where we render our menu, add items and 
         ColorTabs.push_back("CT Box");
         ColorTabs.push_back("T Box");
         ColorTabs.push_back("Hands");
+        ColorTabs.push_back("Weapons");
         ColorTabs.push_back("World");
         
         for(int i = 0; i < ColorTabs.size(); i++) {
@@ -1113,6 +1112,12 @@ void cdrawings::drawmenu() { // This is where we render our menu, add items and 
             this->drawcolorpicker(rewidth + 12, y + 70, "Hands", vars.colors.hands, 0);
             
             this->drawcolorpicker(rewidth + 12 + 300, y + 70, "Hands Ignore", vars.colors.hands_ign, 0);
+        }
+        
+        if(vars.colors.tab == cColorTabs::WEAPCHams) {
+            this->drawcolorpicker(rewidth + 12, y + 70, "Weapon", vars.colors.weapon, 0);
+            
+            this->drawcolorpicker(rewidth + 12 + 300, y + 70, "Weapon Ingore", vars.colors.weapon_ign, 0);
         }
         
         if(vars.colors.tab == cColorTabs::World) {
