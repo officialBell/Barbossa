@@ -12,7 +12,7 @@ McSwaggens (for his linux base and much other things)
 --------------------------
 ### Cant Inject
 ```
-[osxinj](https://github.com/scen/osxinj)
+https://github.com/scen/osxinj
 Recompile osxinj it for some reason when I upload osxinj it doesnt work for anyone except me 
 ```
 --------------------------
