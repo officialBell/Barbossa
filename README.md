@@ -10,6 +10,12 @@ trinialol (for making a tutorial on how to compile it)
 McSwaggens (for his linux base and much other things)
 ```
 --------------------------
+### Cant Inject
+```
+https://github.com/scen/osxinj
+Recompile osxinj it for some reason when I upload osxinj it doesnt work for anyone except me 
+```
+--------------------------
 ```
 git clone https://github.com/sonicrules11/Barbossa 
 cd Barbossa
