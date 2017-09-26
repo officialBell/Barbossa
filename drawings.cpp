@@ -960,6 +960,8 @@ void cdrawings::drawmenu() { // This is where we render our menu, add items and 
         this->addbutton(rewidth + 12, y + 30, "Thirdperson (HVH)", &vars.misc.thirdpersonmode, 7);
         // Right Side
         this->addbutton(rewidth + 12 + 170, y + 30, "No AA With Knife", &vars.misc.knifeaa, 0);
+        this->addbutton(rewidth + 12 + 170, y + 30, "No Flash", &vars.misc.noflash, 1);
+        this->addslider(rewidth + 12 + 170, y + 30, 90, "", vars.misc.flashalpha, 2, 255, 0);
 
         this->addbutton(rewidth + 12 + 170, y + 30, "Anti Screenshot", &vars.misc.antiscreenshot, 10);
         this->addbutton(rewidth + 12, y + 30, "Anti Untrust", &vars.misc.antiuntrust, 10);
