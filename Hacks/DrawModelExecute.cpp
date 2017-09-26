@@ -76,6 +76,19 @@ IMaterial* CreateMaterial(bool ignorez, bool wireframe, std::string szType) {
             createdMaterial = pMatSystem->FindMaterial("barbossa_chamsmat_unlit", TEXTURE_GROUP_MODEL);
         }
     }
+    if(szType == "WireFrame") {
+        if(ignorez) {
+            if (!IsFileExists(GetWorkingPath().append("csgo/materials/").append("barbossa_chamsmat_unlit_ignorez_wirefame").append(".vmt"))) {
+                AddMaterial("barbossa_chamsmat_unlit_ignorez_wireframe", szType, ignorez, true);
+            }
+            createdMaterial = pMatSystem->FindMaterial("barbossa_chamsmat_unlit_ignorez_wireframe", TEXTURE_GROUP_MODEL);
+        } else {
+            if (!IsFileExists(GetWorkingPath().append("csgo/materials/").append("barbossa_chamsmat_unlit_wireframe").append(".vmt"))) {
+                AddMaterial("barbossa_chamsmat_unlit_wireframe", szType, ignorez, true);
+            }
+            createdMaterial = pMatSystem->FindMaterial("barbossa_chamsmat_unlit_wireframe", TEXTURE_GROUP_MODEL);
+        }
+    }
     
     createdMaterial->IncrementReferenceCount();
     
@@ -93,6 +106,9 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
     static IMaterial* firstLit = CreateMaterial(false, false, "UnlitGeneric");
     static IMaterial* secondLit = CreateMaterial(true, false, "UnlitGeneric");
     
+    static IMaterial* firstWire = CreateMaterial(false, true, "WireFrame");
+    static IMaterial* secondWire = CreateMaterial(true, true, "WireFrame");
+    
     if(pInfo.pModel) {
         std::string pszModel = pModelInfo->GetModelName(pInfo.pModel);
         
@@ -103,6 +119,7 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
         }
         
        
+        
          //No Sky, drinks fps...
          
          for (MaterialHandle_t i = pMatSystem->FirstMaterial(); i != pMatSystem->InvalidMaterial(); i = pMatSystem->NextMaterial(i))
@@ -123,7 +140,7 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
          }
         
         
-        // World Paint, drinks fps...
+        //World Paint
         
         for (MaterialHandle_t i = pMatSystem->FirstMaterial(); i != pMatSystem->InvalidMaterial(); i = pMatSystem->NextMaterial(i))
         {
@@ -142,9 +159,6 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
             
         }
        
-
-        
-        
         // Weapon Chams
         if(pszModel.find("weapons") != std::string::npos  && vars.visuals.weaponchams) {
             //if(!(pszModel.find("arms") != std::string::npos)) {
@@ -154,6 +168,8 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
                     return firstLit;
                 else if(vars.visuals.weaponType == 1)
                     return firstLayer;
+                else if (vars.visuals.weaponType == 2)
+                    return firstWire;
             }();
 
             materialCheckFirst->ColorModulate(vars.colors.weapon);
@@ -161,6 +177,8 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
             pModelRender->ForcedMaterialOverride(materialCheckFirst);
             CallOriginalModel(thisptr, context, state, pInfo, pCustomBoneToWorld);
         }
+        
+    
         // Hand Chams
         if(pszModel.find("arms") != std::string::npos && vars.visuals.handchams) {
             
@@ -169,6 +187,8 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
                     return firstLit;
                 else if(vars.visuals.handsType == 1)
                     return firstLayer;
+                else if (vars.visuals.handsType == 2)
+                    return firstWire;
             }();
 
             materialCheckFirst->ColorModulate(vars.colors.hands);
@@ -204,6 +224,8 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
                             return firstLit;
                         else if(vars.visuals.playersType == 1)
                             return firstLayer;
+                        else if (vars.visuals.playersType == 2)
+                            return firstWire;
                     }();
                     
                     IMaterial* materialCheckSecond = [&]() -> IMaterial* {
@@ -211,6 +233,8 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
                             return secondLit;
                         else if(vars.visuals.playersType == 1)
                             return secondLayer;
+                        else if (vars.visuals.playersType == 2)
+                            return secondWire;
                     }();
                     
                     
@@ -219,10 +243,12 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
                         CallOriginalModel(thisptr, context, state, pInfo, pCustomBoneToWorld);
                         pModelRender->ForcedMaterialOverride(NULL);
                     } else {
-                        materialCheckSecond->ColorModulate(ColorNonIgnorez);
-                        materialCheckSecond->AlphaModulate(vars.visuals.playerchams_alpha / 255.f);
-                        pModelRender->ForcedMaterialOverride(materialCheckSecond);
-                        CallOriginalModel(thisptr, context, state, pInfo, pCustomBoneToWorld);
+                        if(vars.visuals.wallhack) {
+                            materialCheckSecond->ColorModulate(ColorNonIgnorez);
+                            materialCheckSecond->AlphaModulate(vars.visuals.playerchams_alpha / 255.f);
+                            pModelRender->ForcedMaterialOverride(materialCheckSecond);
+                            CallOriginalModel(thisptr, context, state, pInfo, pCustomBoneToWorld);
+                        }
                     
                         materialCheckFirst->ColorModulate(ColorIgnorez);
                         materialCheckFirst->AlphaModulate(vars.visuals.playerchams_alpha / 255.f);
@@ -238,4 +264,3 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
     CallOriginalModel(thisptr, context, state, pInfo, pCustomBoneToWorld);
     pModelRender->ForcedMaterialOverride(NULL);
     }
-
