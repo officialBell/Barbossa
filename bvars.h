@@ -108,6 +108,7 @@ public:
         bool fakelag = false; // Fake lag enable ^
         bool fakeaa = false; // Enable Fake ofc
         bool clantag = true; // Enables Clantag
+        bool knifeaa = false; // Disables AA when knife is out
     }misc;
     
     class cColors {
