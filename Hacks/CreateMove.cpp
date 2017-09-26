@@ -53,13 +53,17 @@ auto MakeAntiAim(CUserCmd* cmd, C_BaseEntity* local, C_BaseCombatWeapon* weapon,
                     bPacket = false;
                     else bPacket = true;
               }
-
-            if(weapon->IsKnife() || weapon->IsGrenade() || weapon->IsBomb())
+            if(vars.misc.knifeaa) {
+            if(weapon->IsKnife() || weapon->IsBomb())
+                return;
+            
+            }
+            if(weapon->IsGrenade())
                 return;
             
             if(vars.misc.aaX > 0) {
                 if(vars.misc.aaX == VIEW_ANTIAIM_PITCH::Emotion) {
-                    cmd->viewangles.x = 82;
+                    cmd->viewangles.x = 89;
                 }
                 if(vars.misc.aaX == VIEW_ANTIAIM_PITCH::Up) {
                     cmd->viewangles.x = -89;
