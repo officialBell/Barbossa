@@ -922,6 +922,9 @@ void cdrawings::drawmenu() { // This is where we render our menu, add items and 
         this->addbutton(rewidth + 12, y + 30, "Skeleton", &vars.visuals.skeleton, 6);
         this->addbutton(rewidth + 12, y + 30, "Hitbox", &vars.visuals.headhitbox, 7);
         this->addbutton(rewidth + 12, y + 30, "Enemy Only", &vars.visuals.enemyonly, 8);
+        // Right Side
+        this->addbutton(rewidth + 12, y + 30, "Wallhack Player Chams", &vars.visuals.wallhack, 1);
+
     }
     
     if(vars.tabIndex == tTabs::Chams) {
@@ -929,6 +932,7 @@ void cdrawings::drawmenu() { // This is where we render our menu, add items and 
         
         chamsvector.push_back("Lit");
         chamsvector.push_back("Texture");
+        chamsvector.push_back("Wireframe");
 
         
         this->addbutton(rewidth + 12, y + 30, "Chams", &vars.visuals.chams, 0);
