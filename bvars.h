@@ -109,6 +109,8 @@ public:
         bool fakeaa = false; // Enable Fake ofc
         bool clantag = true; // Enables Clantag
         bool knifeaa = false; // Disables AA when knife is out
+        bool noflash = true; // No Flash 
+        int flashalpha = 0.f; // Flash Alpha
     }misc;
     
     class cColors {
