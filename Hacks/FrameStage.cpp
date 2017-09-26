@@ -1,5 +1,29 @@
 #include "main.h"
 
+// No Flash
+void MakeNoflash(ClientFrameStage_t stage) {
+    
+    if (!pEngine->IsInGame())
+        return;
+    
+    if(!vars.misc.noflash)
+        return;
+    
+    if (stage != ClientFrameStage_t::FRAME_NET_UPDATE_POSTDATAUPDATE_START)
+        return;
+    
+    C_BaseEntity* localplayer = (C_BaseEntity*)pEntList->GetClientEntity(pEngine->GetLocalPlayer());
+    
+    if (!localplayer)
+        return;
+    
+    if (vars.misc.noflash) {
+        *localplayer->GetFlashMaxAlpha() = 255.0f - vars.misc.flashalpha;
+    } else {
+        *localplayer->GetFlashMaxAlpha() = 255.0f;
+    }
+}
+
 void hkFrameStage(void* thisptr, ClientFrameStage_t curStage) {
     auto* local = pEntList->GetClientEntity(pEngine->GetLocalPlayer());
     
@@ -36,6 +60,9 @@ void hkFrameStage(void* thisptr, ClientFrameStage_t curStage) {
         }
     }
    
+    if(vars.misc.noflash)
+        MakeNoflash(curStage);
+    
     clientvmt->GetOriginalMethod<tFrameStage>(36)(thisptr, curStage);
     
     if(curStage == ClientFrameStage_t::FRAME_NET_UPDATE_POSTDATAUPDATE_START) {
