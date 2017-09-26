@@ -57,6 +57,7 @@ public:
         bool chams = false; // Player Chams
         bool headhitbox = false; // Snaplines but goes to head
         bool enemyonly = false; // Enemy Only ofc
+        bool wallhackchams = false; // Shows Chams through walls 
         
         int weaponType = 1; // Weapon Type 0 - Lit 1 - Texture
         int handsType = 1; // Hand Type 0 - Lit 1 - Texture
