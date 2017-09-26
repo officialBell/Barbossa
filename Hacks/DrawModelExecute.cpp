@@ -147,7 +147,7 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
         
         // Weapon Chams
         if(pszModel.find("weapons") != std::string::npos  && vars.visuals.weaponchams) {
-            if(!(pszModel.find("arms") != std::string::npos)) {
+            //if(!(pszModel.find("arms") != std::string::npos)) {
                 
             IMaterial* materialCheckFirst = [&]() -> IMaterial* {
                 if(vars.visuals.weaponType == 0)
@@ -155,19 +155,7 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
                 else if(vars.visuals.weaponType == 1)
                     return firstLayer;
             }();
-            
-            IMaterial* materialCheckSecond = [&]() -> IMaterial* {
-                if(vars.visuals.weaponType == 0)
-                    return secondLit;
-                else if(vars.visuals.weaponType == 1)
-                    return secondLayer;
-            }();
-            /* Disables Ignored Cham
-            materialCheckSecond->ColorModulate(vars.colors.weapon_ign);
-            materialCheckSecond->AlphaModulate(vars.visuals.weaponchams_alpha / 255.f);
-            pModelRender->ForcedMaterialOverride(materialCheckSecond);
-            CallOriginalModel(thisptr, context, state, pInfo, pCustomBoneToWorld);
-            */
+
             materialCheckFirst->ColorModulate(vars.colors.weapon);
             materialCheckFirst->AlphaModulate(vars.visuals.weaponchams_alpha / 255.f);
             pModelRender->ForcedMaterialOverride(materialCheckFirst);
@@ -182,24 +170,13 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
                 else if(vars.visuals.handsType == 1)
                     return firstLayer;
             }();
-            
-            IMaterial* materialCheckSecond = [&]() -> IMaterial* {
-                if(vars.visuals.handsType == 0)
-                    return secondLit;
-                else if(vars.visuals.handsType == 1)
-                    return secondLayer;
-            }();
-            
-            materialCheckSecond->ColorModulate(vars.colors.hands_ign);
-            materialCheckSecond->AlphaModulate(vars.visuals.handchams_alpha / 255.f);
-            pModelRender->ForcedMaterialOverride(materialCheckSecond);
-            CallOriginalModel(thisptr, context, state, pInfo, pCustomBoneToWorld);
-            
+
             materialCheckFirst->ColorModulate(vars.colors.hands);
             materialCheckFirst->AlphaModulate(vars.visuals.handchams_alpha / 255.f);
             pModelRender->ForcedMaterialOverride(materialCheckFirst);
             CallOriginalModel(thisptr, context, state, pInfo, pCustomBoneToWorld);
         }
+            
         // Player Chams
         if(pszModel.find("models/player") != std::string::npos && vars.visuals.chams) {
             auto* local = pEntList->GetClientEntity(pEngine->GetLocalPlayer());
@@ -261,4 +238,4 @@ void hkDrawModelExecute(void* thisptr, void* context, void *state, const ModelRe
     CallOriginalModel(thisptr, context, state, pInfo, pCustomBoneToWorld);
     pModelRender->ForcedMaterialOverride(NULL);
     }
-}
+
