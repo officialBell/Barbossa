@@ -1120,13 +1120,11 @@ void cdrawings::drawmenu() { // This is where we render our menu, add items and 
         if(vars.colors.tab == cColorTabs::HANDChams) {
             this->drawcolorpicker(rewidth + 12, y + 70, "Hands", vars.colors.hands, 0);
             
-            this->drawcolorpicker(rewidth + 12 + 300, y + 70, "Hands Ignore", vars.colors.hands_ign, 0);
         }
         
         if(vars.colors.tab == cColorTabs::WEAPCHams) {
             this->drawcolorpicker(rewidth + 12, y + 70, "Weapon", vars.colors.weapon, 0);
             
-            this->drawcolorpicker(rewidth + 12 + 300, y + 70, "Weapon Ingore", vars.colors.weapon_ign, 0);
         }
         
         if(vars.colors.tab == cColorTabs::World) {
