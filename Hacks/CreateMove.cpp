@@ -770,6 +770,88 @@ auto MakeBhop(CUserCmd* cmd, C_BaseEntity* local) -> void {
     }
 }
 
+void MakeTrigger(CUserCmd *Cmd) {
+    
+    if(!vars.aimbot.trigger)
+        return;
+    
+    if(pInputSystem->IsButtonDown(MOUSE_5)) {
+        
+        C_BaseEntity* LocalPlayer = (C_BaseEntity*)pEntList->GetClientEntity(pEngine->GetLocalPlayer());
+        
+        if (!LocalPlayer || LocalPlayer->GetHealth() < 0) {
+            return;
+        }
+        
+        C_BaseCombatWeapon* activeWeapon = (C_BaseCombatWeapon*)pEntList->GetClientEntityFromHandle(LocalPlayer->GetActiveWeapon());
+        if (!activeWeapon || activeWeapon->GetAmmo() == 0)
+            return;
+        
+        
+        Vector traceStart, traceEnd;
+        
+        Vector viewAngles;
+        pEngine->GetViewAngles(viewAngles);
+        Vector viewAngles_rcs = viewAngles + (LocalPlayer->GetPunchAngles() * 2.0f);
+        
+        AngleVectors(viewAngles_rcs, &traceEnd);
+        
+        traceStart = LocalPlayer->GetEyePosition();
+        traceEnd = traceStart + (traceEnd * 8192.0f);
+        
+        Ray_t ray;
+        trace_t trace;
+        CTraceFilter filter;
+        filter.pSkip = LocalPlayer;
+        
+        ray.Init(traceStart, traceEnd);
+        pEngineTrace->TraceRay(ray, MASK_SHOT, &filter, &trace);
+        
+        if (trace.allsolid || trace.startsolid) {
+            return;
+        }
+        
+        C_BaseEntity* player = (C_BaseEntity*)trace.m_pEnt;
+        if(!player || player->GetHealth() < 0 || player->GetImmune()) {
+            return;
+        }
+        
+        if(player->GetClientClass()->m_ClassID != EClassIds::CCSPlayer) {
+            return;
+        }
+        
+        if(LocalPlayer->GetTeam() == player->GetTeam()) {
+            return;
+        }
+        
+        if (activeWeapon->GetNextPrimaryAttack() > pGlobals->curtime) {
+            if (*activeWeapon->GetItemDefinitionIndex() == WEAPON_REVOLVER) {
+                Cmd->buttons &= ~IN_ATTACK2;
+            } else {
+                Cmd->buttons &= ~IN_ATTACK;
+            }
+        } else {
+            if (*activeWeapon->GetItemDefinitionIndex() == WEAPON_REVOLVER) {
+                Cmd->buttons |= IN_ATTACK2;
+            } else {
+                Cmd->buttons |= IN_ATTACK;
+            }
+        }
+    }
+}
+
+void MakeShowRanks(CUserCmd* cmd)
+{
+    if (!vars.misc.showrank)
+        return;
+    
+    if (!(cmd->buttons & IN_SCORE))
+        return;
+    
+    float input[3] = { 0.f };
+    MsgFunc_ServerRankRevealAll(input);
+}
+
 auto hacks(CUserCmd* cmd, C_BaseEntity* local, C_BaseCombatWeapon* weapon, Vector& vOldAngles, float& flForwardmove, float& flSidemove, bool& sendpacket) -> void {
     
     MakeAutoStrafer(cmd, local);
@@ -787,6 +869,10 @@ auto hacks(CUserCmd* cmd, C_BaseEntity* local, C_BaseCombatWeapon* weapon, Vecto
     MakeAutoPistolas(cmd, weapon);
     
     MakeNoRecoil(local, cmd); // Add norecoil
+    
+    MakeShowRanks(cmd); // Show all ranks
+    
+    MakeTrigger(cmd); // Add triggerbot
     
     if(draw->m_szChangedValue[2].length() > 0) // Name Changer.
         ChangeName(draw->m_szChangedValue[2].c_str());
