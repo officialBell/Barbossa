@@ -20,6 +20,7 @@ extern IPhysicsSurfaceProps* pPhysics;
 //
 extern SendClanTagFn SetTag;
 typedef void (*SendClanTagFn) (const char*, const char*);
+extern MsgFunc_ServerRankRevealAllFn MsgFunc_ServerRankRevealAll;
 
 
 
