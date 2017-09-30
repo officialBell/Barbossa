@@ -21,6 +21,7 @@ IMoveHelper* pMoveHelper = nullptr;
 IPhysicsSurfaceProps* pPhysics = nullptr;
 //
 SendClanTagFn SetTag;
+MsgFunc_ServerRankRevealAllFn MsgFunc_ServerRankRevealAll;
 
 
 VMT* painthook;
