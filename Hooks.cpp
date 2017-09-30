@@ -29,6 +29,8 @@ void ProtectAddr(void* addr, int prot)
 void InitializeVMTs() {
     painthook = new VMT(pPanel);
     
+    uintptr_t findRankReveal = CPatternScanner::Instance()->GetPointer("client.dylib", (unsigned char*) "\x48\x89\x85\x28\xFE\xFF\xFF\x48\xC7\x85\x30\xFE\xFF\xFF\x00\x00\x00\x00\x48\x8D\x05\x00\x00\x00\x00", "xxxxxxxxxxxxxx????xxx????", 0x15) + 0x4;
+    
     uintptr_t findClientMode = CPatternScanner::Instance()->GetPointer("client.dylib", (unsigned char*)"\xE8\x00\x00\x00\x00\x48\xC7\xC3\x00\x00\x00\x00\x4C\x8D\x3D\x00\x00\x00\x00\x0F\x1F\x44\x00", "x????xxx????xxx????xxxx", 0xF) + 0x4;
     
     uintptr_t findClanTag = CPatternScanner::Instance()->GetPointer("engine.dylib", (unsigned char*) "\x48\x8D\x3D\x00\x00\x00\x00\x48\x89\xFE\xE8\x00\x00\x00\x00\xE9\x00\x00\x00\x00", "xxx????xxxx????x????", 0xB) + 0x4;
@@ -44,7 +46,8 @@ void InitializeVMTs() {
     SetTag = reinterpret_cast<SendClanTagFn>(findClanTag);
     pClientMode = reinterpret_cast<IClientMode*>(findClientMode);
     pGlobals = *reinterpret_cast<CGlobalVarsBase**>(findGlobalVars);
-    
+    MsgFunc_ServerRankRevealAll = reinterpret_cast<MsgFunc_ServerRankRevealAllFn>(findRankReveal);
+
     createmovehook = new VMT(pClientMode);
     clientvmt = new VMT(pClient);
     modelhook = new VMT(pModelRender);
