@@ -40,6 +40,7 @@ public:
         bool autopistol = false; // Pistol is like AK
         bool autocrouch = false; // Crouch when something is in fov
         bool autostop = false; // Stops when something is in fov
+        bool trigger = false; // Triggerbot (Key is Mouse5, Change it in CreateMove.cpp)
     }aimbot;
     
     class cVisuals {
@@ -112,6 +113,7 @@ public:
         bool knifeaa = false; // Disables AA when knife is out
         bool noflash = true; // No Flash 
         int flashalpha = 0.f; // Flash Alpha
+        bool showrank = true; // Show All Ranks
     }misc;
     
     class cColors {
