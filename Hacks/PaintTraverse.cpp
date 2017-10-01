@@ -253,7 +253,6 @@ void hkPaintTraverse(void* thisptr, VPANEL panel, bool forceRepaint, bool allowF
         vars.colors.ctbox_ign = Color(0, 124, 255, 255);
         
         vars.colors.hands = Color::Orange();
-        vars.colors.hands_ign = Color::Blue();
         
         vars.colors.world = Color::Green(); // :^)
         
