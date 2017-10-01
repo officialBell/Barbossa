@@ -192,6 +192,22 @@ void cdrawings::drawboxoutline(int x, int y, int w, int h, Color color) {
     this->drawbox(x + 1, y + 1, w - 2, h - 2, Color(0, 0, 0, 180));
 }
 
+void cdrawings::drawhealthbar(int x, int y, int w, int h, int health, Color color) {
+    
+    if(health > 100)
+        health = 100;
+    
+    int hw = h - ((h) * health) / 100;
+    draw->fillrgba(x, y - 1, w, h + 2, Color(0, 0, 0, 120));
+    draw->fillrgba(x, y + hw - 1, w, h - hw + 2, color);
+    draw->drawbox(x, y - 1, w, h + 2, Color(0, 0, 0, 200));
+}
+
+float getDist(Vector a, Vector b) {
+    float dist = sqrt( pow( a.x - b.x, 2 ) + pow( a.y - b.y, 2 ) + pow( a.z - b.z, 2 ) ) * 0.0254f;
+    return dist;
+}
+
 void cdrawings::fillrgba(int x, int y, int w, int h, Color color) {
     pSurface->DrawSetColor(color);
     pSurface->DrawFilledRect(x, y, x + w, y + h);
@@ -917,13 +933,17 @@ void cdrawings::drawmenu() { // This is where we render our menu, add items and 
         this->addbutton(rewidth + 12, y + 30, "Box", &vars.visuals.box, 1);
         this->addbutton(rewidth + 12, y + 30, "Name", &vars.visuals.name, 2);
         this->addbutton(rewidth + 12, y + 30, "Health", &vars.visuals.health, 3);
-        this->addbutton(rewidth + 12, y + 30, "Health Text", &vars.visuals.healthtext, 4);
-        this->addbutton(rewidth + 12, y + 30, "Snaplines", &vars.visuals.snapline, 5);
-        this->addbutton(rewidth + 12, y + 30, "Skeleton", &vars.visuals.skeleton, 6);
-        this->addbutton(rewidth + 12, y + 30, "Hitbox", &vars.visuals.headhitbox, 7);
-        this->addbutton(rewidth + 12, y + 30, "Enemy Only", &vars.visuals.enemyonly, 8);
+        this->addbutton(rewidth + 12, y + 30, "Armour", &vars.visuals.armour, 4);
+        this->addbutton(rewidth + 12, y + 30, "Health Text", &vars.visuals.healthtext, 5);
+        this->addbutton(rewidth + 12, y + 30, "Snaplines", &vars.visuals.snapline, 6);
+        this->addbutton(rewidth + 12, y + 30, "Skeleton", &vars.visuals.skeleton, 7);
+        this->addbutton(rewidth + 12, y + 30, "Hitbox", &vars.visuals.headhitbox, 8);
+        this->addbutton(rewidth + 12, y + 30, "Enemy Only", &vars.visuals.enemyonly, 9);
         // Right Side
-        this->addbutton(rewidth + 12 + 170, y + 30, "Wallhack Player Chams", &vars.visuals.wallhack, 1);
+        this->addbutton(rewidth + 12 + 170, y + 30, "Wallhack Player Chams", &vars.visuals.wallhack, 0);
+        this->addbutton(rewidth + 12 + 170, y + 30, "Defusing", &vars.visuals.defusing, 1);
+        this->addbutton(rewidth + 12 + 170, y + 30, "Grabbing", &vars.visuals.grabbing, 2);
+        this->addbutton(rewidth + 12 + 170, y + 30, "Rescuing", &vars.visuals.rescuing, 3);
 
     }
     
