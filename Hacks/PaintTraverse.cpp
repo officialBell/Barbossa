@@ -92,9 +92,28 @@ auto DrawPlayerESP() -> void {
                 
                 if(vars.visuals.name)
                     draw->drawstring(players.x + players.w / 2, players.y - 12, Color::White(), espfont, info.name, true);
-                    
+                 
                 if(vars.visuals.healthtext)
                     draw->drawstring(players.x + players.w / 2, players.y + players.h + 8, Color::White(), espfont, std::to_string(entity->GetHealth()).c_str(), true);
+                    
+                if(vars.visuals.health)
+                    draw->drawhealthbar(players.x - 5, players.y, 3, players.h, entity->GetHealth(), Color::Green());
+                        
+                if(vars.visuals.armour)
+                    draw->drawhealthbar(players.x - 10, players.y, 3, players.h, entity->GetArmor(), Color(0, 125, 255, 255));
+                    
+                if(entity->IsDefusing())
+                    if(vars.visuals.defusing)
+                    draw->drawstring(players.x + players.w / 2, players.y - 27, Color::Red(), espfont, "DEFUSING", true);
+                    
+                if(entity->IsGrabbingHostage())
+                    if(vars.visuals.grabbing)
+                    draw->drawstring(players.x + players.w / 2, players.y - 27, Color::Red(), espfont, "RESCUING", true);
+                        
+                if(entity->IsRescuing())
+                    if(vars.visuals.rescuing)
+                    draw->drawstring(players.x + players.w / 2, players.y - 27, Color::Red(), espfont, "CARRYING", true);
+                    
                     
                 if(vars.visuals.snapline)
                     draw->drawline(getscreenw / 2, getscreenh, players.x + players.w / 2, players.y + players.h, playercolor);
