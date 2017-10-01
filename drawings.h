@@ -41,6 +41,7 @@ public:
     void drawstringINDEX(int x, int y, Color color, const char *szString, int index, bool bCenter = false, IFlags getFlag = IFlags::IFLAG_DEFAULT);
     int CalcPos(int x);
     void addbutton(int x, int y, const char* szValue, bool* var, int index, IFlags getFlag = IFlags::IFLAG_DEFAULT);
+    void drawhealthbar(int x, int y, int w, int h, int health, Color color);
     void addtabs(int x, int y, const char* szTabs, int index, int& itab, int max);
     void addslider(int x, int y, int w, const char* szString, int& value, int index, int max = 180, int min = 0);
     void addcolorslider(int x, int y, int w, const char* szString, int col[4], int index, int max = 255, int min = 0);
