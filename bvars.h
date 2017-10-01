@@ -48,7 +48,8 @@ public:
         bool enabled = false; // Enable
         bool box = false; // Box ESP
         bool name = false; // Name ESP
-        bool health = false; // Health Bar (Does not work)
+        bool health = false; // Health Bar 
+        bool armour = false; // Armour Bar
         bool healthtext = false; // Health Text
         bool weapon = false; // Current weapon ESP (Does not work)
         bool snapline = false; // Snaplines obv
