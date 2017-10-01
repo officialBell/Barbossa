@@ -59,6 +59,9 @@ public:
         bool headhitbox = false; // Snaplines but goes to head
         bool enemyonly = false; // Enemy Only ofc
         bool wallhack = false; // Shows Chams through walls 
+        bool defusing = false; // Defusing ESP
+        bool grabbing = false; // Grabbing ESP (Hostage)
+        bool rescuing = false; // Rescuing ESP (Hostage)
         
         int weaponType = 1; // Weapon Type 0 - Lit 1 - Texture
         int handsType = 1; // Hand Type 0 - Lit 1 - Texture
