@@ -2,10 +2,14 @@
 No I do not own or claim any ownership of this hack or SDK all i'm doing is uploading it to github instead of it sitting on
 discord. You are welcome to fork this over and work on it yourself if you'd like ^_^
 --------------------------
+# Updates
+I wont be updating this until I put everything in seperate files which i've been slowly working on 2/10 of the way there so far
+--------------------------
+--------------------------
 ```
 Credits to
 wÊs
-viking
+viking (Owner)
 trinialol (for making a tutorial on how to compile it)
 McSwaggens (for his linux base and much other things)
 ```
