@@ -4,6 +4,9 @@ discord. You are welcome to fork this over and work on it yourself if you'd like
 --------------------------
 # Updates
 I wont be updating this until I put everything in seperate files which i've been slowly working on 2/10 of the way there so far
+
+## Discord
+https://discord.gg/tVJhPqH
 --------------------------
 --------------------------
 ```
