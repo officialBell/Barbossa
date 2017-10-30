@@ -3,7 +3,7 @@ No I do not own or claim any ownership of this hack or SDK all i'm doing is uplo
 discord. You are welcome to fork this over and work on it yourself if you'd like ^_^
 --------------------------
 # Updates
-I wont be updating this until I put everything in seperate files which i've been slowly working on 2/10 of the way there so far
+This week on Saturday at 03:45 Mountain Standard Time
 
 --------------------------
 --------------------------
