@@ -276,9 +276,8 @@ void DrawPlayerESP()
 void pwnmymenu()
 {
     
-    if(pInputSystem->IsButtonDown(KEY_INSERT))
-    {
+    if(pInputSystem->IsButtonDown(KEY_LALT) || pInputSystem->IsButtonDown(KEY_RALT) || pInputSystem->IsButtonDown(KEY_INSERT)) {
         vars.menu = !vars.menu;
-        }
-    
     }
+    
+}
