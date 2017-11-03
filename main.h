@@ -31,6 +31,9 @@
 
 using namespace std;
 
+#include "offsets.h"
+
+#include "SDK/CEffects.h" // Thnx Rocco
 #include "SDK/Vector.h"
 #include "SDK/Others.h"
 #include "SDK/common.h"
@@ -39,8 +42,6 @@ using namespace std;
 #include "SDK/ISurface.h"
 #include "SDK/IPanel.h"
 #include "SDK/ICvar.h"
-#include "SDK/netvarmanager.h"
-#include "SDK/offsets.h"
 #include "SDK/C_BaseEntity.h"
 #include "SDK/IClientEntityList.h"
 #include "SDK/IVDebugOverlay.h"
@@ -60,6 +61,8 @@ using namespace std;
 #include "SDK/CInput.h"
 #include "SDK/VMT.h"
 
+#include "netvarmanager.h"
+
 /* Variables */
 #include "bvars.h"
 
@@ -72,7 +75,7 @@ using namespace std;
 /* Utilities */
 #include "utils.h"
 
-/* Patternscanner, Thank you wÊs :I */
+/* Patternscanner */
 #include "patternscan.h"
 
 /* Hakes */

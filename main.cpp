@@ -2,8 +2,8 @@
 
 
 
-int __attribute__((constructor)) Init() {
-    /* do shiz her. */
+int __attribute__((constructor)) Init()
+{
     
     InitializeInterfaces();
     
@@ -20,5 +20,7 @@ int __attribute__((constructor)) Init() {
     return 0;
 }
 
-void __attribute__((constructor)) DeInit() {
+void __attribute__((constructor)) DeInit()
+{
+
 }

@@ -4,7 +4,8 @@ class CCSWeaponInfo;
 class KeyValues;
 class CHudTexture;
 
-struct model_t {
+struct model_t
+{
     char name[255];
 };
 
@@ -45,7 +46,8 @@ enum class CSWeaponType : int
     WEAPONTYPE_UNKNOWN
     
 };
-    
+
+
 enum WeaponSound_t
 {
     EMPTY,
@@ -70,7 +72,7 @@ enum WeaponSound_t
     
     NUM_SHOOT_SOUND_TYPES,
 };
- 
+
 class CHudTexture {
     char pad[0x82];
 public:
@@ -136,63 +138,36 @@ public:
     CHudTexture* iconSmall;
 };
 
-class CCSWeaponInfo : public FileWeaponInfo_t
+struct CCSWeaponInfo
 {
-public:
-    CSWeaponType GetWeaponType()
-    {
-        return *(CSWeaponType*)((uintptr_t)this + 0x814);
-    }
-    
-    bool IsFullAuto()
-    {
-        return *(bool*)((uintptr_t)this + 0x820);
-    }
-    
-    float GetWeaponArmorRatio()
-    {
-        return *(float*)((uintptr_t)this + 0x82C);
-    }
-    
-    float GetMaxPlayerSpeed()
-    {
-        return *(float*)((uintptr_t)this + 0x830);
-    }
-    
-    float GetMaxPlayerSpeedAlt()
-    {
-        return *(float*)((uintptr_t)this + 0x834);
-    }
-    
-    float GetPenetration()
-    {
-        return *(float*)((uintptr_t)this + 0x840);
-    }
-    
-    int GetDamage()
-    {
-        return *(int*)((uintptr_t)this + 0x844);
-    }
-    
-    float GetRange()
-    {
-        return *(float*)((uintptr_t)this + 0x848);
-    }
-    
-    float GetRangeModifier()
-    {
-        return *(float*)((uintptr_t)this + 0x84C);
-    }
-    
-    float GetSpread()
-    {
-        return *(float*)((uintptr_t)this + 0x9FC);
-    }
-    
-    int GetZoomLevels()
-    {
-        return *(int*)((uintptr_t)this + 0xE88);
-    }
+    char gap0[8];
+    char *m_szConsoleName;
+    char gap1C[232];
+    char *m_szHUDName;
+    char gap100[64];
+    int m_WeaponType;
+    char pad144[36];
+    bool m_bIsFullAuto;
+    char gap169[3];
+    int m_iDamage;
+    float m_flArmorRatio;
+    int m_iBulletsPerShot;
+    float m_flPenetration;
+    char pad17C[8];
+    float m_flRange;
+    float m_flRangeModifier;
+    float m_flThrowVelocity;
+    char pad190[12];
+    bool m_bHasSilencer;
+    char pad19D[163];
+    int m_iZoomLevels;      // 0x1B0
+    int m_iZoomFOV1;        //
+    int m_iZoomFOV2;        //
+    float m_flZoomTime[3];
+    char pad258[152];
+    bool m_bHasBurstMode;
+    bool m_bIsRevolver;
+    bool m_bCanShootUnderwater;
 };
 
 
@@ -582,25 +557,49 @@ public:
         }
     }
     
-    bool IsAutomatic()
+    bool IsRifle()
     {
-        switch (*this->GetItemDefinitionIndex())
+        switch(*this->GetItemDefinitionIndex())
         {
             case WEAPON_AK47:
             case WEAPON_AUG:
             case WEAPON_FAMAS:
             case WEAPON_GALILAR:
-            case WEAPON_M249:
             case WEAPON_M4A1:
             case WEAPON_M4A1_SILENCER:
+            case WEAPON_SG556:
+                return true;
+            default:
+                return false;
+        }
+    }
+    
+    bool IsSmg()
+    {
+        switch(*this->GetItemDefinitionIndex())
+        {
             case WEAPON_MAC10:
             case WEAPON_P90:
             case WEAPON_UMP45:
             case WEAPON_BIZON:
-            case WEAPON_NEGEV:
             case WEAPON_MP7:
             case WEAPON_MP9:
-            case WEAPON_SG556:
+                return true;
+            default:
+                return false;
+        }
+    }
+    
+    bool IsHeavy()
+    {
+        switch(*this->GetItemDefinitionIndex())
+        {
+            case WEAPON_NEGEV:
+            case WEAPON_M249:
+            case WEAPON_XM1014:
+            case WEAPON_MAG7:
+            case WEAPON_SAWEDOFF:
+            case WEAPON_NOVA:
                 return true;
             default:
                 return false;
@@ -650,15 +649,13 @@ public:
         return *this->GetItemDefinitionIndex() == WEAPON_C4;
     }
     
-    bool CanScope()
+    bool IsSnipScope()
     {
         switch (*this->GetItemDefinitionIndex())
         {
-            case WEAPON_AUG:
             case WEAPON_AWP:
             case WEAPON_G3SG1:
             case WEAPON_SCAR20:
-            case WEAPON_SG556:
             case WEAPON_SSG08:
                 return true;
             default:
@@ -711,27 +708,26 @@ public:
     CCSWeaponInfo* GetCSWpnData()
     {
         typedef CCSWeaponInfo* (* oGetCSWpnData)(void*);
-        return getvfunc<oGetCSWpnData>(this, 524)(this);
+        return getvfunc<oGetCSWpnData>(this, 514)(this);
     }
     
     float GetInaccuracy()
     {
         typedef float (* oGetInaccuracy)(void*);
-        return getvfunc<oGetInaccuracy>(this, 552)(this);
+        return getvfunc<oGetInaccuracy>(this, 537)(this);
     }
     
     float GetSpread()
     {
         typedef float (* oGetSpread)(void*);
-        return getvfunc<oGetSpread>(this, 553)(this);
+        return getvfunc<oGetSpread>(this, 507)(this);
     }
     
     void UpdateAccuracyPenalty()
     {
         typedef void (* oUpdateAccuracyPenalty)(void*);
-        return getvfunc<oUpdateAccuracyPenalty>(this, 554)(this);
+        return getvfunc<oUpdateAccuracyPenalty>(this, 538)(this);
     }
-    
     
     
 };
