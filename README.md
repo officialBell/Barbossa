@@ -12,7 +12,7 @@ Q/A
 
 Q: Menu key?
 
-A: Insert.
+A: Insert, LALT, RALT.
 
 Q: Whats your steam
 
